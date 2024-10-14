@@ -1,13 +1,10 @@
 package desafio.javamacjoptionpane.app;
 
 import javax.swing.JOptionPane;
+
 import desafio.javamacjoptionpane.model.Pessoa;
 import desafio.javamacjoptionpane.utils.CalculadoraIdade;
 import desafio.javamacjoptionpane.utils.Verificador;
-import java.util.Scanner;
-
-import static javax.swing.JOptionPane.*;
-
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -20,7 +17,7 @@ public class Main {
         String msg = "A diferença de idade de " + pessoa1.getNome() + " para " + pessoa2.getNome() + " é de: " +
                 diferenca + " Anos";
 
-        showMessageDialog(null, msg);
+        JOptionPane.showMessageDialog(null, msg);
     }
 
     public static Pessoa informacoesDaPessoa(String posicaoPessoa) throws Exception {
@@ -30,21 +27,21 @@ public class Main {
         int idadePessoa = 0;
 
 
-        nomePessoa = showInputDialog(null, "Informe o nome da " + posicaoPessoa + " pessoa:");
+        nomePessoa = JOptionPane.showInputDialog(null, "Informe o nome da " + posicaoPessoa + " pessoa:");
         if (!verificador.validaNomePessoa(nomePessoa)) {
-            showMessageDialog(null, "Erro! Você não pode deixar o campo nome vazio!", "Error", 2);
+            JOptionPane.showMessageDialog(null, "Erro! Você não pode deixar o campo nome vazio!", "Error", 2);
             throw new RuntimeException("CAMPO VAZIO");
         }
 
         try {
-            idadePessoa = Integer.parseInt(showInputDialog(null, "Escreva a idade da " + posicaoPessoa + " pessoa:"));
+            idadePessoa = Integer.parseInt(JOptionPane.showInputDialog(null, "Escreva a idade da " + posicaoPessoa + " pessoa:"));
         } catch (Exception NoSuchElementException) {
-            showMessageDialog(null, "Erro! Não é possível escrever letras, símbolos ou deixar o idade vazio!", "Error", 2);
+            JOptionPane.showMessageDialog(null, "Erro! Não é possível escrever letras, símbolos ou deixar o idade vazio!", "Error", 2);
             throw new RuntimeException("LETRAS, SÍMBOLOS OU VAZIO");
         }
 
         if (!verificador.validaIdadePessoa(idadePessoa)) {
-            showMessageDialog(null, "Erro! Idade inválida!", "Error", 2);
+            JOptionPane.showMessageDialog(null, "Erro! Idade inválida!", "Error", 2);
             throw new RuntimeException("IDADE INVÁLIDA");
         }
         return new Pessoa(nomePessoa, idadePessoa);

@@ -8,30 +8,27 @@ import desafio.javamacjoptionpane.utils.Verificador;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Pessoa pessoa1 = informacoesDaPessoa("primeira");
-        Pessoa pessoa2 = informacoesDaPessoa("segunda");
+    	try {
+    		Pessoa pessoa1 = informacoesDaPessoa("primeira");
+            Pessoa pessoa2 = informacoesDaPessoa("segunda");
 
-        CalculadoraIdade calculadoraIdade = new CalculadoraIdade();
-        int diferenca = calculadoraIdade.calculaDiferenca(pessoa1.getIdade(), pessoa2.getIdade());
+            int diferenca = CalculadoraIdade.calculaDiferenca(pessoa1.getIdade(), pessoa2.getIdade());
 
-        String msg = "A diferença de idade de " + pessoa1.getNome() + " para " + pessoa2.getNome() + " é de: " +
-                diferenca + " Anos";
+            String msg = "A diferença de idade de " + pessoa1.getNome() + " para " + pessoa2.getNome() + " é de: " +
+                    diferenca + " Anos";
 
-        JOptionPane.showMessageDialog(null, msg);
+            JOptionPane.showMessageDialog(null, msg);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "FINALIZANDO PROCESSO POR ERRO", "Error", 2);
+		}
     }
 
     public static Pessoa informacoesDaPessoa(String posicaoPessoa) throws Exception {
-        Verificador verificador = new Verificador();
-
         String nomePessoa;
         int idadePessoa = 0;
 
-
         nomePessoa = JOptionPane.showInputDialog(null, "Informe o nome da " + posicaoPessoa + " pessoa:");
-        if (!verificador.validaNomePessoa(nomePessoa)) {
-            JOptionPane.showMessageDialog(null, "Erro! Você não pode deixar o campo nome vazio!", "Error", 2);
-            throw new RuntimeException("CAMPO VAZIO");
-        }
+        Verificador.validaNomePessoa(nomePessoa);
 
         try {
             idadePessoa = Integer.parseInt(JOptionPane.showInputDialog(null, "Escreva a idade da " + posicaoPessoa + " pessoa:"));
@@ -40,10 +37,8 @@ public class Main {
             throw new RuntimeException("LETRAS, SÍMBOLOS OU VAZIO");
         }
 
-        if (!verificador.validaIdadePessoa(idadePessoa)) {
-            JOptionPane.showMessageDialog(null, "Erro! Idade inválida!", "Error", 2);
-            throw new RuntimeException("IDADE INVÁLIDA");
-        }
+        Verificador.validaIdadePessoa(idadePessoa);
+        
         return new Pessoa(nomePessoa, idadePessoa);
     }
 }
